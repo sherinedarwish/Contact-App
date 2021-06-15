@@ -4,16 +4,21 @@ const createcontact = require("../services").createcontact;
 const getcontacts = require("../services").getcontacts;
 
 
-// GET METHOD
-router.get("/", (req, res, next) => {
+
+// Login Page
+router.get("/login", (req, res, next) => {
     // res.send("Welcome");
-    res.render("index", { title: "Sherine" });
+    res.render('login')
 });
 
+// GET METHOD
+router.get("/register", (req, res, next) => {
+    res.render('register')
+});
 
 // POST METHOD
-router.post('/', async function(req, res, next) {
-   // console.log(req.body);
+router.post('/register', async function(req, res, next) {
+    console.log(req.body);
     await createcontact(req.body);
     res.render('index', { title: 'Created tasks'});
   });

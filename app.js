@@ -3,19 +3,31 @@ const express = require("express");
 const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 const indexRouter = require("./routes/index");
+const userRouter = require("./routes/users");
 
-const PORT = process.env.PORT || 3000;
 
 const app = express();
-app.set("view engine", "ejs");
-app.use(expressLayouts);
-app.set("layout", "views/layout");
+app.use(express.json());
 
+
+// EJS
+app.use(expressLayouts);
+app.set("view engine", "ejs");
+app.set('layout','./layout');
+
+// Body Parser
+app.use(express.urlencoded({ extended: false }));
+
+// MongoDB
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
 
+// Routes
 app.use("/", indexRouter);
+app.use("/users", userRouter);
 
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server is up and running"));
