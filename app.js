@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+var path = require('path');
 const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 const indexRouter = require("./routes/index");
@@ -17,6 +18,7 @@ app.set('layout','./layout');
 
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB
 mongoose.connect(process.env.CONNECTION_STRING, {

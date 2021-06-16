@@ -1,8 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const createcontact = require("../services").createcontact;
-const getcontacts = require("../services").getcontacts;
-
 
 
 // Login Page
@@ -17,9 +14,43 @@ router.get("/register", (req, res, next) => {
 });
 
 // POST METHOD
-router.post('/register', async function(req, res, next) {
-    console.log(req.body);
-    await createcontact(req.body);
-    res.render('index', { title: 'Created tasks'});
+router.post('/register', function(req, res, next) {
+   // console.log(req.body);
+  //  res.render('index');
+    const { name, email,password,password2 } = req.body;
+    let errors =[]
+
+    // check required fields
+    if(!name || !email || !password || !password2) {
+        errors.push ({ msg: 'Please fill in all fields' });
+
+    }
+    // Check passwords match
+    if( password !== password2 )
+    {
+        errors.push({ msg: 'Passwords do not match'});
+
+    }
+    // Check password length
+    if( password.length < 6)
+    {
+        errors.push ({ msg:"Password is too short"});
+    }
+    if (errors.length > 0 )
+    {
+        res.render('register',{ 
+            errors,
+            name,
+            email,
+            password,
+            password2
+        });
+        console.log(errors);
+    }
+    else
+    {
+        res.send("pass")
+    }
   });
+
 module.exports = router;
