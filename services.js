@@ -3,9 +3,7 @@ let ContactModel = require("./models/Contact");
 
 // POST METHOD
 async function createcontact(body){
-   // console.log("body: ", body);
     const res = await ContactModel.create([{body}]);
-   // console.log("final result: " ,res);
 };
 
 // GET METHOD
