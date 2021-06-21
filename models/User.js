@@ -16,8 +16,11 @@ const UserSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
-    
+    },
+    contacts: [{
+         type: mongoose.Schema.ObjectId,
+        ref: 'Contact'
+    }]
 });
 
 const User = mongoose.model('User', UserSchema);

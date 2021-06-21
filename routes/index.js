@@ -18,9 +18,8 @@ router.get("/dashboard", ensureAuthenticated, (req, res) =>
 
 
 // POST METHOD
-router.post('/', async function(req, res, next) {
-   // console.log(req.body);
+router.post('/dashboard', async function(req, res, next) {
     await createcontact(req.body);
-    res.render('index', { title: 'Created tasks'});
+    res.render('dashboard',{name: req.user.name });
   });
 module.exports = router;

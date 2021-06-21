@@ -1,3 +1,53 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <% name %> </p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<h1 class="mt-4">Welcome <%= name %></h1>
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+           Contact Form
+        </h1>
+        <%- include ('./partials/messages') %>
+
+        <form action="/dashboard" method="POST">
+          <div class="form-group">
+            <label for="first_name"> Add First Name</label>
+            <input
+              type="name"
+              id="first_name"1
+              name="first_name"
+              class="form-control"
+              placeholder="Enter First name"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="last_name"> Add Last Name</label>
+            <input
+              type="last_name"
+              id="last_name"1
+              name="last_name"
+              class="form-control"
+              placeholder="Enter Last Name"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="number">Number</label>
+            <input
+              type="number"
+              id="number"
+              name="number"
+              class="form-control"
+              placeholder="Enter Number"
+              value="<%= typeof number != 'undefined' ? number : '' %>"
+            />
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-block">
+            Add
+          </button>
+        </form>
+        <p class="lead mt-4">Wanna logout? <a href="/users/logout">Logout</a></p>
+      </div>
+    </div>
+  </div>
