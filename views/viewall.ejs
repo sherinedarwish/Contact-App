@@ -1,0 +1,46 @@
+<h1 class="mt-4">Welcome </h1>
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+           View All Contacts
+        </h1>
+                    
+        <body>
+            <div class="table-data">
+            <table border="4" style=" padding: 10px;">
+                <tr>
+                    <th> "" </th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Number</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+
+                <% var i=1; %>
+                <% data.forEach(function(item){ %>
+                <tr>
+                    <td><%=i; %></td>
+                    <td><%=item.first_name %></td>
+                    <td><%=item.last_name %></td>
+                    <td><%=item.number %></td>
+                    
+                </tr>
+                <%  i++; }) %>
+                    
+
+                
+            </table>
+            </div>
+        </body>
+
+        <form action="/dashboard" method="POST">
+          
+        </form>
+        <p class="lead mt-4">Wanna logout? <a href="/users/logout">Logout</a></p>
+      </div>
+    </div>
+  </div>
