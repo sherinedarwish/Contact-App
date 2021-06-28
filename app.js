@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 //Passport config
-require('./passport')(passport);
+require('./config/passport')(passport);
 
 
 // EJS

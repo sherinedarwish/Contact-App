@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const createcontact = require("../services").createcontact;
 const getcontacts = require("../services").getcontacts;
-const { ensureAuthenticated } = require("../auth");
+const { ensureAuthenticated } = require("../config/auth");
 
 // Welcome Page
 router.get("/", (req, res, next) => {

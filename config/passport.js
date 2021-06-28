@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 // Load User Model
 
-const User = require('./models/User');
+const User = require('../models/User');
 module.exports = function(passport)
 {
 
