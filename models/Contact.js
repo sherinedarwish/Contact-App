@@ -1,10 +1,22 @@
 const mongoose = require("mongoose");
 
 const ContactSchema = new mongoose.Schema({
-    first_name: String,
-    last_name: String,
-    number: Number
-    
+    first_name: {
+        type: String,
+        required: true
+    },
+    last_name: {
+        type: String,
+        required: true
+    },
+    number: {
+        type: Number,
+        required: true
+    },
+    userId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }
 });
 
 const ContactModel = mongoose.model("contact", ContactSchema,'contacts');

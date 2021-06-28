@@ -1,29 +1,50 @@
-let ContactModel = require("./models/Contact");
+const Contact = require("./models/Contact");
+const User = require('./models/User');
 
+//POST METHOD
+async function createcontact(req,res){
+    const userId = req.user._id;
+    const { first_name,last_name,number } = req.body;
 
-// POST METHOD
-async function createcontact(body){
-    const res = await ContactModel.create([{body}]);
+    const newContact = new Contact({
+        first_name,
+        last_name,
+        number,
+        userId
+    });
+    console.log(first_name,last_name,number);
+
+    newContact
+        .save()
+        .then(contact => {
+            console.log("Contact Saved")})
+        .catch(err => console.log(err))
 };
 
-// async function contactsCreate(req, res) {
-//     const userId = req.user.id;
-  
+// async function createcontact(req,res) {
+    
+//     const userId = req.user._id;
+
 //     try {
 //       const newContact = await Contact.create(req.body);
 //       const user = await User.findById(userId);
+
 //       user.contacts.push(newContact);
+   
 //       await user.save();
-//       return res.status(201).json(newContact);
-//     } catch ( err ) {
-//       return res.status(500).json({ message: 'Something went wrong'});
+//       return newContact;
+//     } 
+//     catch ( err ) {
+//       return err
 //     }
 //   }
 
 // GET METHOD
 async function getcontacts(req,res){
-    const data = await ContactModel.find().catch(err=> console.error(err));
-    console.log(data);
+    const data = await Contact.find().catch(err=> console.error(err));
+    //const data = JSON.stringify([extractdata]);
+    //const newdata = JSON.parse(data);
+    //console.log(data);
     return data
 };
 

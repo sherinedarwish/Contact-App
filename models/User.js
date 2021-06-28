@@ -15,8 +15,13 @@ const UserSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
+<<<<<<< Updated upstream
         default: Date.now,
     },
+=======
+        default: Date.now
+    }
+>>>>>>> Stashed changes
 });
 
 module.exports = mongoose.model("User", UserSchema);

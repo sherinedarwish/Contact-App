@@ -7,7 +7,20 @@ const { forwardAuthenticated } = require('../config/auth');
 const User = require("../models/User");
 
 // Login Page
+<<<<<<< Updated upstream
 router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
+=======
+router.get("/login", forwardAuthenticated, (req, res) => {
+    // res.send("Welcome");
+    res.render('login')
+});
+
+
+// GET METHOD
+router.get("/register", forwardAuthenticated, (req, res) => {
+    res.render('register')
+});
+>>>>>>> Stashed changes
 
 // Register Page
 router.get("/register", forwardAuthenticated, (req, res) =>
@@ -26,9 +39,75 @@ router.post("/register", (req, res) => {
     if (password !== password2) {
         errors.push({ msg: "Passwords do not match" });
     }
+<<<<<<< Updated upstream
 
     if (password.length < 6) {
         errors.push({ msg: "Password must be at least 6 characters" });
+=======
+    // Check password length
+    if( password.length < 6)
+    {
+        errors.push ({ msg:"Password is too short"});
+    }
+    if (errors.length > 0 )
+    {
+        res.render('register',{ 
+            errors,
+            name,
+            email,
+            password,
+            password2
+        });
+        console.log(errors);
+    }
+    else
+    {
+        console.log("validation pass");
+        // Validation Pass
+        User.findOne({ email:email })
+        .then(user => {
+            if(user)
+            {
+                // USER EXISTS
+                errors.push({ msg: "Email is already registered"});
+                res.render('register',{ 
+                    errors,
+                    name,
+                    email,
+                    password,
+                    password2
+                });
+            }
+            else
+            {
+                const newUser = new User({
+                    name,
+                    email,
+                    password
+                });
+
+                // Hash Password
+                bcrypt.genSalt(10,(err,salt) =>
+                    bcrypt.hash(newUser.password , salt , (err, hash) => {
+                        
+                        if(err) throw err;
+                        // set passwrd to hashed
+                        newUser.password = hash;
+
+                        // save user
+                        newUser
+                            .save()
+                            .then(user => {
+                                res.redirect('/users/login')})
+                            .catch(err => console.log(err))
+                }))
+
+                // newUser.create([{body}]);
+                console.log(newUser);
+                
+            }
+        });
+>>>>>>> Stashed changes
     }
 
     if (errors.length > 0) {
@@ -70,12 +149,20 @@ router.post("/register", (req, res) => {
     }
 });
 
+<<<<<<< Updated upstream
 // Login
 router.post("/login", (req, res, next) => {
     passport.authenticate("local", {
         successRedirect: "/dashboard",
         failureRedirect: "/users/login",
         failureFlash: true,
+=======
+router.post('/login',(req,res,next)=> {
+    passport.authenticate('local', {
+        successRedirect: '/dashboard',
+        failureRedirect: '/users/login',
+        failureFlash: true
+>>>>>>> Stashed changes
     })(req, res, next);
 });
 
