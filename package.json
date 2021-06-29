@@ -4,6 +4,7 @@
     "description": "",
     "main": "app.js",
     "scripts": {
+        "postinstall": "npm run build",
         "start": "npm install & node ./bin/www",
         "dev": "nodemon app.js"
     },
