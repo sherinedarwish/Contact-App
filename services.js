@@ -12,43 +12,41 @@ async function createcontact(req,res){
         number,
         userId
     });
-    console.log(first_name,last_name,number);
+    
 
     newContact
         .save()
         .then(contact => {
-            console.log("Contact Saved")})
+            console.log("New Contact Saved")})
         .catch(err => console.log(err))
 };
-
-// async function createcontact(req,res) {
-    
-//     const userId = req.user._id;
-
-//     try {
-//       const newContact = await Contact.create(req.body);
-//       const user = await User.findById(userId);
-
-//       user.contacts.push(newContact);
-   
-//       await user.save();
-//       return newContact;
-//     } 
-//     catch ( err ) {
-//       return err
-//     }
-//   }
 
 // GET METHOD
 async function getcontacts(req,res){
     const data = await Contact.find().catch(err=> console.error(err));
-    //const data = JSON.stringify([extractdata]);
-    //const newdata = JSON.parse(data);
-    //console.log(data);
     return data
+};
+
+// GET CONTACTS FROM ID
+async function getcontactsID(req){
+    const userID = req.user._id;
+    const data = await Contact.find({"userId": userID}).catch(err=> console.error(err));
+    return data
+};
+
+
+
+// Delete Method
+async function deletecontact(req,res){
+    const paramsId = req.params._id;
+   // const query = {"_id": ObjectId("4d512b45cc9374271b02ec4f") };
+ //   const data = await Contact.deleteOne(query).catch(err=> console.error(err));
+   // return data
 };
 
 module.exports = {
     createcontact,
-    getcontacts
+    getcontacts,
+    deletecontact,
+    getcontactsID
 }

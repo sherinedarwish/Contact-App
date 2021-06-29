@@ -9,16 +9,16 @@
                     
         <body>
             <div class="table-data">
-            <table border="4" style=" padding: 10px;">
+            <table style=" padding: 10px;">
                 <tr>
-                    <th> "" </th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Number</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th> . &ensp; </th> 
+                    <th> First Name  &ensp; </th>
+                    <th> Last Name &ensp;</th>
+                    <th> Number &emsp;&emsp;&emsp;&emsp;&emsp;</th>
+                    <th> Edit &ensp;</th>
+                    <th> Delete &ensp;</th>
                 </tr>
-
+                
 
                 <% var i=1; %>
                 <% data.forEach(function(item){ %>
@@ -27,7 +27,21 @@
                     <td><%=item.first_name %></td>
                     <td><%=item.last_name %></td>
                     <td><%=item.number %></td>
-                    
+                    <td>
+                    <form action="/edit/<%=item.id%>" method="GET">
+                      <button type="submit" class="btn btn-secondary btn-block">
+                        Edit
+                      </button>
+                    </form>
+                    </td>
+                    <td>
+                   <form  action='/delete<%= item._id %>' method="DELETE">
+                      <button type="submit" class="btn btn-secondary btn-block">
+                        Delete
+                      </button>
+                    </form>
+                    </td>
+                
                 </tr>
                 <%  i++; }) %>
                     
@@ -36,11 +50,9 @@
             </table>
             </div>
         </body>
-
-        <form action="/dashboard" method="POST">
-          
-        </form>
-        <p class="lead mt-4">Wanna logout? <a href="/users/logout">Logout</a></p>
+       
+        <p class="lead mt-5">Back to Dashboard <a class="lead mt-5" href="/dashboard">Click here</a></p>
+        <p class="lead mt-1">Wanna logout? <a href="/users/logout">Logout</a></p>
       </div>
     </div>
   </div>

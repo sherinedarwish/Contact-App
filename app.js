@@ -22,13 +22,8 @@ app.set("view engine", "ejs");
 app.set("layout", "./layout");
 
 // Body Parser
-<<<<<<< Updated upstream
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
-=======
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
->>>>>>> Stashed changes
 
 // Express session
 app.use(
