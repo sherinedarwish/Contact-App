@@ -21,32 +21,41 @@ async function createcontact(req,res){
         .catch(err => console.log(err))
 };
 
+
 // GET METHOD
 async function getcontacts(req,res){
     const data = await Contact.find().catch(err=> console.error(err));
     return data
 };
 
+
 // GET CONTACTS FROM ID
-async function getcontactsID(req){
+async function getcontactsByUser(req){
     const userID = req.user._id;
     const data = await Contact.find({"userId": userID}).catch(err=> console.error(err));
     return data
 };
 
 
-
 // Delete Method
 async function deletecontact(req,res){
-    const paramsId = req.params._id;
-   // const query = {"_id": ObjectId("4d512b45cc9374271b02ec4f") };
- //   const data = await Contact.deleteOne(query).catch(err=> console.error(err));
-   // return data
+    Contact.findByIdAndRemove(req.params.id).then(data => console.log(data)).catch(err=> console.error(err));
+    res.redirect('/viewall');
+ 
+};
+
+
+// Update
+async function editcontact(req){
+    const contactId = req.params.id;
+    const data = await Contact.find({"_id": contactId}).catch(err=> console.error(err));
+    return data
 };
 
 module.exports = {
     createcontact,
     getcontacts,
     deletecontact,
-    getcontactsID
+    getcontactsByUser,
+    editcontact
 }
