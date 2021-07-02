@@ -1,4 +1,4 @@
-<h1 class="mt-4">Edittig contact <%= data.first_name%></h1>
+<h1 class="mt-4">Editting contact <%= first_name%></h1>
 
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
@@ -15,7 +15,7 @@
               name="first_name"
               class="form-control"
               placeholder= " .."
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof first_name != 'undefined' ? first_name : '' %>"
             />
           </div>
           <div class="form-group">
@@ -26,7 +26,7 @@
               name="last_name"
               class="form-control"
               placeholder="Enter Last Name"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof last_name != 'undefined' ? last_name : '' %>"
             />
           </div>
           <div class="form-group">
@@ -42,7 +42,7 @@
           </div>
           
           <button type="submit" class="btn btn-primary btn-block">
-            Add
+            Update
           </button>
           
         </form>

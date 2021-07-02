@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const createcontact = require("../services").createcontact;
-const getcontacts = require("../services").getcontacts;
+const getcontact = require("../services").getcontact;
 const getcontactsByUser = require("../services").getcontactsByUser;
 const editcontact = require("../services").editcontact;
 const deletecontact = require("../services").deletecontact;
@@ -35,11 +35,11 @@ router.post('/dashboard', async function(req, res, next) {
 
 // Edit
 router.get("/edit/:id", ensureAuthenticated, async (req, res) => {
-  const data = await editcontact(req);
+  const data = await getcontact(req);
   console.log("data from editing= ",data);
   const { first_name, last_name, number } = data;
   console.log("first_name: ", first_name);
-  res.render('edit',{data})
+  res.render('edit',{...data._doc})
 });
 
 // delete

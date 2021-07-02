@@ -46,9 +46,9 @@ async function deletecontact(req,res){
 
 
 // Update
-async function editcontact(req){
+async function getcontact(req){
     const contactId = req.params.id;
-    const data = await Contact.find({"_id": contactId}).catch(err=> console.error(err));
+    const data = await Contact.findById(contactId).catch(err=> console.error(err));
     return data
 };
 
@@ -57,5 +57,5 @@ module.exports = {
     getcontacts,
     deletecontact,
     getcontactsByUser,
-    editcontact
+    getcontact
 }
