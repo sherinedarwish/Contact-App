@@ -1,58 +1,64 @@
-<h1 class="mt-4">Welcome </h1>
+<h1 class="mt-4">Welcome</h1>
 
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
-      <div class="card card-body">
-        <h1 class="text-center mb-3">
-           View All Contacts
-        </h1>
-                    
-        <body>
-            <div class="table-data">
-            <table style=" padding: 10px;">
-                <tr>
-                    <th> . &ensp; </th> 
-                    <th> First Name  &ensp; </th>
-                    <th> Last Name &ensp;</th>
-                    <th> Number &emsp;&emsp;&emsp;&emsp;&emsp;</th>
-                    <th> Edit &ensp;</th>
-                    <th> Delete &ensp;</th>
-                </tr>
-                
+        <div class="card card-body">
+            <h1 class="text-center mb-3">View All Contacts</h1>
 
-                <% var i=1; %>
-                <% data.forEach(function(item){ %>
-                <tr>
-                    <td><%=i; %></td>
-                    <td><%=item.first_name %></td>
-                    <td><%=item.last_name %></td>
-                    <td><%=item.number %></td>
-                    <td>
-                    <form action="/edit/<%=item.id%>" method="GET">
-                      <button type="submit" class="btn btn-secondary btn-block">
-                        Edit
-                      </button>
-                    </form>
-                    </td>
-                    <td>
-                   <form  action='/delete/<%= item._id %>' method="GET">
-                      <button type="submit" class="btn btn-secondary btn-block">
-                        Delete
-                      </button>
-                    </form>
-                    </td>
-                
-                </tr>
-                <%  i++; }) %>
-                    
+            <body>
+                <div class="table-data">
+                    <table style="padding: 10px">
+                        <tr>
+                            <th>. &ensp;</th>
+                            <th>First Name &ensp;</th>
+                            <th>Last Name &ensp;</th>
+                            <th>Number &emsp;&emsp;&emsp;&emsp;&emsp;</th>
+                            <th>Edit &ensp;</th>
+                            <th>Delete &ensp;</th>
+                        </tr>
 
-                
-            </table>
-            </div>
-        </body>
-       
-        <p class="lead mt-5">Back to Dashboard <a class="lead mt-5" href="/dashboard">Click here</a></p>
-        <p class="lead mt-1">Wanna logout? <a href="/users/logout">Logout</a></p>
-      </div>
+                        <% var i=1; %> <% data.forEach(function(item){ %>
+                        <tr>
+                            <td><%=i; %></td>
+                            <td><%=item.first_name %></td>
+                            <td><%=item.last_name %></td>
+                            <td><%=item.number %></td>
+                            <td>
+                                <form action="/edit/<%=item.id%>" method="GET">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-secondary btn-block"
+                                    >
+                                        Edit
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form
+                                    action="/delete/<%= item._id %>?_method=DELETE"
+                                    method="POST"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="btn btn-secondary btn-block"
+                                    >
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% i++; }) %>
+                    </table>
+                </div>
+            </body>
+
+            <p class="lead mt-5">
+                Back to Dashboard
+                <a class="lead mt-5" href="/dashboard">Click here</a>
+            </p>
+            <p class="lead mt-1">
+                Wanna logout? <a href="/users/logout">Logout</a>
+            </p>
+        </div>
     </div>
-  </div>
+</div>

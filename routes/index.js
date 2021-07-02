@@ -41,7 +41,7 @@ router.get("/edit/:id", ensureAuthenticated, async (req, res) => {
 });
 
 // delete
-router.get("/delete/:id", ensureAuthenticated, async (req, res) => {
+router.delete("/delete/:id", ensureAuthenticated, async (req, res) => {
     await deletecontact(req, res);
 });
 
