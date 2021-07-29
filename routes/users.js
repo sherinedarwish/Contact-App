@@ -8,7 +8,6 @@ const User = require("../models/User");
 
 // Login Page
 router.get("/login", forwardAuthenticated, (req, res) => {
-    // res.send("Welcome");
     res.render('login')
 });
 
@@ -17,11 +16,6 @@ router.get("/login", forwardAuthenticated, (req, res) => {
 router.get("/register", forwardAuthenticated, (req, res) => {
     res.render('register')
 });
-
-// Register Page
-router.get("/register", forwardAuthenticated, (req, res) =>
-    res.render("register")
-);
 
 // Register
 router.post("/register", (req, res) => {
@@ -97,44 +91,7 @@ router.post("/register", (req, res) => {
             }
         });
     }
-
-    if (errors.length > 0) {
-        res.render("register", { errors, name, email, password, password2 });
-    } else {
-        User.findOne({ email })
-            .then((user) => {
-                if (user) {
-                    errors.push({ msg: "Email already exists" });
-                    res.render("register", {
-                        errors,
-                        name,
-                        email,
-                        password,
-                        password2,
-                    });
-                } else {
-                    const newUser = new User({ name, email, password });
-
-                    bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(newUser.password, salt, (err, hash) => {
-                            if (err) throw err;
-                            newUser.password = hash;
-                            newUser
-                                .save()
-                                .then((user) => {
-                                    req.flash(
-                                        "success_msg",
-                                        "You are now registered and can log in"
-                                    );
-                                    res.redirect("/users/login");
-                                })
-                                .catch((e) => console.log(e));
-                        });
-                    });
-                }
-            })
-            .catch((e) => console.log(e));
-    }
+  
 });
 
 router.post('/login',(req,res,next)=> {

@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const createcontact = require("../services").createcontact;
-const getcontact = require("../services").getcontact;
 const getcontactsByUser = require("../services").getcontactsByUser;
 const getcontact = require("../services").getcontact;
 const deletecontact = require("../services").deletecontact;
@@ -16,7 +15,6 @@ router.get("/", (req, res, next) => {
 // View All Page
 router.get("/viewall", ensureAuthenticated, async (req, res) => {
     const data = await getcontactsByUser(req);
-    console.log("data from viewall= ", data);
     res.render("viewall", { data: data });
 });
 
@@ -36,10 +34,9 @@ router.post("/dashboard", async function (req, res, next) {
 // Edit
 router.get("/edit/:id", ensureAuthenticated, async (req, res) => {
     const data = await getcontact(req);
-    console.log("data from editing= ", data);
     res.render("edit", { ...data._doc });
 });
-
+ 
 // delete
 router.delete("/delete/:id", ensureAuthenticated, async (req, res) => {
     await deletecontact(req, res);
